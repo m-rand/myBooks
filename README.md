@@ -8,6 +8,8 @@ There are two tabs in the app:
 
 All results are displayed in a lazy list with book covers loaded asynchronously using [NetworkImage](https://stackoverflow.com/a/64416344). When no cover is available, a „photo“ placeholder is used. 
 
+Searching and fetching data from server is live with 1s time interval. 
+
 ——
 
 This demo is inspired by [Combine networking with a hint of SwiftUI](https://engineering.nodesagency.com/categories/ios/2020/03/16/Combine-networking-with-a-hint-of-swiftUI) blog post.
