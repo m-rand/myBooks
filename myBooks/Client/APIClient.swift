@@ -19,7 +19,6 @@ struct APIClient {
         return URLSession.shared
             .dataTaskPublisher(for: request)
             .tryMap { result -> Response<T> in
-                print(result.data)
                 let value = try JSONDecoder().decode(T.self, from: result.data)
                 return Response(value: value, response: result.response)
             }

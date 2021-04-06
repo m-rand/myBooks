@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 
-struct BookDB {
+struct BookAPIClient {
     static let apiClient = APIClient()
     static let baseUrlString = "https://openlibrary.org"
 }
@@ -19,7 +19,7 @@ enum APIPath: String {
     case searchTitle = "/search.json?title="
 }
 
-extension BookDB {
+extension BookAPIClient {
     
     static func requestSubject(path: APIPath, query: String) -> AnyPublisher<SubjectResponse, Error> {
         

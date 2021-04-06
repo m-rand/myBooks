@@ -14,15 +14,16 @@ struct DiscoverView: View {
 
     
     private func search(text: String) {
-        self.viewModel.searchSubject(query: text)
+        print("search:", text)
+        if (!text.isEmpty) {
+            self.viewModel.searchSubject(query: text)
+        }
     }
     
     var body: some View {
         NavigationView {
             List {
-                SearchBar(text: $userInput, placeholder: "Subject to search...", action: {
-                    search(text: userInput)
-                })
+                SearchBar(text: $viewModel.searchText, placeholder: "Subject to search...")
             
                 ForEach(viewModel.subjectBooks) { book in
                     HStack {

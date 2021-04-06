@@ -11,19 +11,37 @@ import Combine
 
 class SearchTitleViewModel: ObservableObject {    
     private var searchTitleResponse: [SearchTitleBook] = []
-    private var cancellationToken: AnyCancellable?
+    private var urlToken: AnyCancellable?
+    
+    private var textToken: AnyCancellable?
+    @Published var searchText: String = String()
+    
     @Published var searchTitleBooks: [(String, [Book])] = []
+    
+    init() {
+        textToken = $searchText
+            .debounce(for: .milliseconds(700), scheduler: RunLoop.main) // wait 1s for further processing
+            .map {
+                return $0.trimmingCharacters(in: .whitespacesAndNewlines)
+                    .lowercased()
+                    .folding(options: .diacriticInsensitive, locale: .current)
+                    .replacingOccurrences(of: " ", with: "+")
+            }
+            .filter{ !$0.isEmpty } // the input string must have at least 1 character
+            .compactMap{ $0 } // if not, return nil
+            .removeDuplicates()
+            .sink { _ in
+                //
+            } receiveValue: { input in
+                self.searchTitle(query: input)
+            }
+    }
 }
 
 extension SearchTitleViewModel {
 
     func searchTitle(query: String) {
-        let q = query
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .lowercased()
-            .folding(options: .diacriticInsensitive, locale: .current)
-            .replacingOccurrences(of: " ", with: "+")
-        cancellationToken = BookDB.requestSearch(path: .searchTitle, query: q)
+        urlToken = BookAPIClient.requestSearch(path: .searchTitle, query: query)
             .mapError({ (error) -> Error in
                 print(error)
                 return error
