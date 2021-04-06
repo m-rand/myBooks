@@ -24,7 +24,8 @@ extension SubjectViewModel {
             .lowercased()
             .folding(options: .diacriticInsensitive, locale: .current)
             .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        cancellationToken = BookDB.requestSubject(path: .subjects, query: q)
+        cancellationToken = BookAPIClient.requestSubject(path: .subjects, query: q)
+            .print()
             .mapError({ (error) -> Error in
                 print(error)
                 return error

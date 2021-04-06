@@ -23,7 +23,8 @@ extension SearchTitleViewModel {
             .lowercased()
             .folding(options: .diacriticInsensitive, locale: .current)
             .replacingOccurrences(of: " ", with: "+")
-        cancellationToken = BookDB.requestSearch(path: .searchTitle, query: q)
+        cancellationToken = BookAPIClient.requestSearch(path: .searchTitle, query: q)
+            .print()
             .mapError({ (error) -> Error in
                 print(error)
                 return error
