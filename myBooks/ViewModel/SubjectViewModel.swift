@@ -20,7 +20,7 @@ class SubjectViewModel: ObservableObject {
     
     init() {
         textToken = $searchText
-            .debounce(for: .milliseconds(700), scheduler: RunLoop.main) // wait 1s for further processing
+            .debounce(for: .milliseconds(1000), scheduler: RunLoop.main) // wait 1s for further processing
             .map {
                 return $0.trimmingCharacters(in: .whitespacesAndNewlines)
                     .lowercased()
