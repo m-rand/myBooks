@@ -8,18 +8,17 @@
 
 import SwiftUI
 
+
 struct SearchBar: View {
     
     @Binding var text: String
     var placeholder: String = "Search ..."
     @State private var isEditing = false
-    var action: () -> ()
         
     var body: some View {
         HStack {
             TextField(placeholder, text: $text, onCommit: {
                 self.isEditing = false
-                self.action()
             })
                 .padding(8)
                 .padding(.horizontal, 25)
@@ -56,6 +55,6 @@ struct SearchBar: View {
 
 struct SearchBar_Previews: PreviewProvider {
     static var previews: some View {
-        SearchBar(text: .constant(""), action: { })
+        SearchBar(text: .constant(""))
     }
 }

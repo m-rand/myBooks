@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct SearchView: View {
     
@@ -19,9 +20,8 @@ struct SearchView: View {
     var body: some View {
         NavigationView {
             List {
-                SearchBar(text: $userInput, placeholder: "Book title...", action: {
-                    search(text: userInput)
-                })
+                SearchBar(text: $viewModel.searchText, placeholder: "Book title...")
+                
                 ForEach(viewModel.searchTitleBooks, id: \.0) { item in
                     SearchRow(authorName: item.0, books: item.1)
                 }
