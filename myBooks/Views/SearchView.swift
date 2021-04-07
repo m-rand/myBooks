@@ -11,11 +11,6 @@ import Combine
 struct SearchView: View {
     
     @ObservedObject var viewModel: SearchTitleViewModel
-    @State var userInput = ""
-    
-    private func search(text: String) {
-        self.viewModel.searchTitle(query: text)
-    }
     
     var body: some View {
         NavigationView {

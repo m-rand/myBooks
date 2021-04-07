@@ -10,15 +10,6 @@ import SwiftUI
 struct DiscoverView: View {
 
     @ObservedObject var viewModel: SubjectViewModel
-    @State var userInput = ""
-
-    
-    private func search(text: String) {
-        print("search:", text)
-        if (!text.isEmpty) {
-            self.viewModel.searchSubject(query: text)
-        }
-    }
     
     var body: some View {
         NavigationView {
