@@ -1,6 +1,6 @@
 # myBooks
 
-Just a simple „proof-of-concept“ app demo for searching books via [OpenLibrary](https://openlibrary.org) developer API. App is written using SwiftUI and Combine frameworks.  
+Just a simple „proof-of-concept“ "sunny-day" app demo for searching books via [OpenLibrary](https://openlibrary.org) developer API. App is written using SwiftUI and Combine frameworks.  
 
 There are two tabs in the app:
 - Search Subjects: searches for 10 books related to given subject (e.g. „love“, „death“, „art“, …).
@@ -8,7 +8,7 @@ There are two tabs in the app:
 
 All results are displayed in a lazy list with book covers loaded asynchronously using [NetworkImage](https://stackoverflow.com/a/64416344). When no cover is available, a „photo“ placeholder is used. 
 
-Searching and fetching data from server is live with 1s time interval. 
+Searching and fetching data from server is live with 1s time interval after last keystroke, again using Combine framework.  
 
 ——
 
