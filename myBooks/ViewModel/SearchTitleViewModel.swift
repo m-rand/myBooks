@@ -30,11 +30,10 @@ class SearchTitleViewModel: ObservableObject {
             .filter{ !$0.isEmpty } // the input string must have at least 1 character
             .compactMap{ $0 } // if not, return nil
             .removeDuplicates()
-            .sink { _ in
-                //
-            } receiveValue: { input in
+            .sink(receiveCompletion: { _ in },
+                receiveValue: { input in
                 self.searchTitle(query: input)
-            }
+            })
     }
 }
 
